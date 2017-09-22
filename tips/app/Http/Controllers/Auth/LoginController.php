@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -36,4 +39,29 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+
+    public function isEmail()
+    {
+        if (filter_var(request()->username, FILTER_VALIDATE_EMAIL))
+            return "email";
+        else
+            return "username";
+
+    }
+
+    public function login()
+    {
+        if (Auth::attempt([$this->isEmail() => request()->username, "password" => request()->password])) {
+
+            return redirect()->intended('/');
+        } else {
+            return redirect()->back()->withInput(['username']);
+
+
+        }
+
+    }
+
+
 }
