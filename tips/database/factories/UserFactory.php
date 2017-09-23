@@ -19,7 +19,18 @@ $factory->define(App\User::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
+        'username' => $faker->unique()->safeEmail,
+        'dob' => $faker->date(),
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
+    ];
+});
+
+$factory->define(App\Post::class, function (Faker $faker) {
+
+    return [
+        'title' => $faker->unique()->name,
+        'body' => $faker->text,
+        'approved' => $faker->boolean
     ];
 });
