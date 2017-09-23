@@ -15,6 +15,8 @@
                     @endif
 
                     You are logged in!
+                        <br>
+                    you join on {{$user->dob->diffForHumans ()}}
                 </div>
             </div>
         </div>

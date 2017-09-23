@@ -8,7 +8,8 @@ class Post extends Model
 {
     //
 
-    protected $fillable = ["title", "body", "approved"];
+    protected $fillable = ["title", "body", "approved"  ];
+
 
 
     public static function approved()

@@ -3,7 +3,6 @@
 @section('content')
     <div class="container">
         <div class="row">
-
             <h1>Edit a post</h1>
             <form action="{{route('post.update', $post->id)}}" method="post" class="form-horizontal  ">
                 {{ csrf_field() }}
@@ -35,8 +34,6 @@
                     </div>
                 </div>
             </form>
-
-
         </div>
     </div>
 @endsection
