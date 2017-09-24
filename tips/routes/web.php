@@ -26,5 +26,5 @@ Route::get('/test', function () {
 });
 
 
-Route::post('/admin/login', "Auth\\LoginController@login");
-Route::get('/admin/loginadmin', "Auth\\LoginController@loginadmin")->name('admin.login');
+Route::post('/admin/loginadmin', "Auth\\LoginController@login")->name('admin.login2');
+Route::get('/admin/login', "Auth\\LoginController@loginadmin")->name('admin.login');

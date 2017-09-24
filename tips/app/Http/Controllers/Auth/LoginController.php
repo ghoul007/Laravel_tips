@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\URL;
 
 class LoginController extends Controller
 {
@@ -37,7 +38,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+//        $this->middleware('guest')->except('logout');
     }
 
 
@@ -60,9 +61,23 @@ class LoginController extends Controller
 
     public function login()
     {
-        if (Auth::attempt([$this->isEmail() => request()->username, "password" => request()->password])) {
 
-            return redirect()->intended('/');
+
+     $prev_url =app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName();
+     switch ($prev_url){
+         case 'admin.login':
+                 $user_info = ["post.create","admin"];
+                 break;
+             default:
+                 $user_info = ["post.index","web"];
+                 break;
+
+     }
+
+
+        if (Auth::guard($user_info[1])->attempt([$this->isEmail() => request()->username, "password" => request()->password])) {
+
+            return redirect()->intended(route($user_info[0]));
         } else {
             return redirect()->back()->withInput(['username']);
 
