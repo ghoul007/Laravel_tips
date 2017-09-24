@@ -19,4 +19,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('/post',"PostController");
+Route::resource('/post', "PostController");
+
+Route::get('/test', function () {
+    dd(\Illuminate\Support\Facades\Auth::guard('admin')->attempt(['username' => "aweber@example.org", "password" => "secret"]));
+});
+
+
+Route::post('/admin/login', "Auth\\LoginController@login");
+Route::get('/admin/loginadmin', "Auth\\LoginController@loginadmin")->name('admin.login');

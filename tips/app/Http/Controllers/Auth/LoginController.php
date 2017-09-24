@@ -50,6 +50,14 @@ class LoginController extends Controller
 
     }
 
+    public function loginadmin()
+    {
+
+
+
+        return view('auth.admin.login');
+    }
+
     public function login()
     {
         if (Auth::attempt([$this->isEmail() => request()->username, "password" => request()->password])) {

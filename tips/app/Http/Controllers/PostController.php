@@ -13,7 +13,8 @@ class PostController extends Controller
     public function __construct()
     {
 //        $this->middleware('admin');
-        $this->middleware('auth');
+        $this->middleware('auth')->only('index');
+        $this->middleware('auth:admin')->only('create');
     }
 
 
